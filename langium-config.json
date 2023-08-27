@@ -1,0 +1,15 @@
+{
+    "projectName": "Daedalus",
+    "languages": [{
+        "id": "daedalus",
+        "grammar": "src/language/daedalus.langium",
+        "fileExtensions": [".d"],
+        "textMate": {
+            "out": "syntaxes/daedalus.tmLanguage.json"
+        },
+        "monarch": {
+            "out": "syntaxes/daedalus.monarch.ts"
+        }
+    }],
+    "out": "src/language/generated"
+}
