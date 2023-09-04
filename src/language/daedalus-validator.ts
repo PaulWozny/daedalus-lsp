@@ -1,5 +1,5 @@
 import type { ValidationAcceptor, ValidationChecks } from 'langium';
-import type { DaedalusAstType, Person } from './generated/ast.js';
+import type { DaedalusAstType, Model } from './generated/ast.js';
 import type { DaedalusServices } from './daedalus-module.js';
 
 /**
@@ -9,7 +9,7 @@ export function registerValidationChecks(services: DaedalusServices) {
     const registry = services.validation.ValidationRegistry;
     const validator = services.validation.DaedalusValidator;
     const checks: ValidationChecks<DaedalusAstType> = {
-        Person: validator.checkPersonStartsWithCapital
+        // Person: validator.checkPersonStartsWithCapital
     };
     registry.register(checks, validator);
 }
@@ -19,13 +19,13 @@ export function registerValidationChecks(services: DaedalusServices) {
  */
 export class DaedalusValidator {
 
-    checkPersonStartsWithCapital(person: Person, accept: ValidationAcceptor): void {
-        if (person.name) {
-            const firstChar = person.name.substring(0, 1);
-            if (firstChar.toUpperCase() !== firstChar) {
-                accept('warning', 'Person name should start with a capital.', { node: person, property: 'name' });
-            }
-        }
+    checkPersonStartsWithCapital(model: Model, accept: ValidationAcceptor): void {
+        // if (person.name) {
+        //     const firstChar = person.name.substring(0, 1);
+        //     if (firstChar.toUpperCase() !== firstChar) {
+        //         accept('warning', 'Person name should start with a capital.', { node: person, property: 'name' });
+        //     }
+        // }
     }
 
 }

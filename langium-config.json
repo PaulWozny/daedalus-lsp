@@ -4,6 +4,7 @@
         "id": "daedalus",
         "grammar": "src/language/daedalus.langium",
         "fileExtensions": [".d"],
+        "caseInsensitive": true,
         "textMate": {
             "out": "syntaxes/daedalus.tmLanguage.json"
         },

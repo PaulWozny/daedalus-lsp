@@ -37,7 +37,9 @@ function startLanguageClient(context: vscode.ExtensionContext): LanguageClient {
 
     // Options to control the language client
     const clientOptions: LanguageClientOptions = {
-        documentSelector: [{ scheme: 'file', language: 'daedalus' }],
+        documentSelector: [
+            { scheme: 'file', language: 'daedalus' },
+            { scheme: 'file', language: 'daedalus-sourcer' }],
         synchronize: {
             // Notify the server about file changes to files contained in the workspace
             fileEvents: fileSystemWatcher

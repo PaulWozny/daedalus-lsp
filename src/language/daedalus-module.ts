@@ -1,7 +1,8 @@
 import type { DefaultSharedModuleContext, LangiumServices, LangiumSharedServices, Module, PartialLangiumServices } from 'langium';
 import { createDefaultModule, createDefaultSharedModule, inject } from 'langium';
-import { DaedalusGeneratedModule, DaedalusGeneratedSharedModule } from './generated/module.js';
+import { DaedalusGeneratedModule, DaedalusGeneratedSharedModule,  } from './generated/module.js';
 import { DaedalusValidator, registerValidationChecks } from './daedalus-validator.js';
+import { DaedalusScopeComputation } from './variable-scope-computaiton.js';
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -26,8 +27,12 @@ export type DaedalusServices = LangiumServices & DaedalusAddedServices
 export const DaedalusModule: Module<DaedalusServices, PartialLangiumServices & DaedalusAddedServices> = {
     validation: {
         DaedalusValidator: () => new DaedalusValidator()
+    },
+    references: {
+        ScopeComputation: (services) => new DaedalusScopeComputation(services)
     }
 };
+
 
 /**
  * Create the full set of services required by Langium.
@@ -46,7 +51,7 @@ export const DaedalusModule: Module<DaedalusServices, PartialLangiumServices & D
  */
 export function createDaedalusServices(context: DefaultSharedModuleContext): {
     shared: LangiumSharedServices,
-    Daedalus: DaedalusServices
+    Daedalus: DaedalusServices,
 } {
     const shared = inject(
         createDefaultSharedModule(context),
@@ -57,6 +62,7 @@ export function createDaedalusServices(context: DefaultSharedModuleContext): {
         DaedalusGeneratedModule,
         DaedalusModule
     );
+
     shared.ServiceRegistry.register(Daedalus);
     registerValidationChecks(Daedalus);
     return { shared, Daedalus };

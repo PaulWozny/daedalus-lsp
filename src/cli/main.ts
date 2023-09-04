@@ -1,4 +1,4 @@
-import type { Model } from '../language/generated/ast.js';
+import type { Model  } from '../language/generated/ast.js';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { DaedalusLanguageMetaData } from '../language/generated/module.js';
@@ -9,8 +9,8 @@ import { NodeFileSystem } from 'langium/node';
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createDaedalusServices(NodeFileSystem).Daedalus;
-    const model = await extractAstNode<Model>(fileName, services);
-    const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
+    const constantDef = await extractAstNode<Model>(fileName, services);
+    const generatedFilePath = generateJavaScript(constantDef, fileName, opts.destination);
     console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
 };
 
